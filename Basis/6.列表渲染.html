@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>列表渲染</title>
+	<script src="../4小时快速入门vue/js/vue.js"></script>
+</head>
+<body>
+	<h1>用 v-for 把一个数组对应为一组元素</h1>
+	<ul id="example-1">
+		<li v-for="item in items" :key="item.message">
+			{{ item.message }}
+		</li>
+		<br>
+		<li v-for="item of items">
+			{{ item.message }}
+		</li>
+	</ul>
+
+	<ul id="example-2">
+		<li v-for="(item, index) in items">
+			{{ parentMessage }} - {{ index }} - {{ item.message }}
+		</li>
+		<template v-for="item in items">
+			<li>{{ item.message }}</li>
+			<li class="divider" role="presentation"></li>
+		</template>
+	</ul>
+
+	<ul id="v-for-object" class="demo">
+		<h2>用 v-for 来遍历一个对象的 属性</h2>
+		<li v-for="value in object">
+			{{ value }}
+		</li>
+		<h2>提供第二个的参数为 属性 名称 (也就是键名)</h2>
+		<li v-for="(value, name) in object">
+			{{ name }}: {{ value }}
+		</li>
+		<h2>还可以用第三个参数作为索引</h2>
+		<li v-for="(value, name, index) in object">
+			{{ index }}. {{ name }}: {{ value }}
+		</li>
+	</ul>
+
+	<div id="app1">
+		<span v-for="n in 10">{{ n }} </span>
+	</div>
+
+	<div id="todo-list-example">
+		<form v-on:submit.prevent="addNewTodo">
+			<label for="new-todo">Add a todo</label>
+			<input
+					v-model="newTodoText"
+					id="new-todo"
+					placeholder="E.g. Feed the cat"
+			>
+			<button>Add</button>
+		</form>
+		<ul>
+			<li
+					is="todo-item"
+					v-for="(todo, index) in todos"
+					v-bind:key="todo.id"
+					v-bind:title="todo.title"
+					v-on:remove="todos.splice(index, 1)"
+			></li>
+		</ul>
+	</div>
+
+	<script>
+		var app1 = new Vue({
+			el: '#app1',
+			data: {  }
+		})
+		var example1 = new Vue({
+			el: '#example-1',
+			data: {
+				items: [
+					{message: 'Hello'},
+					{message: 'Vue'}
+				]
+			},
+		})
+
+		var example2 = new Vue({
+			el: '#example-2',
+			data: {
+				parentMessage: 'Parent',
+				items: [
+					{message: 'Foo'},
+					{message: 'Bar'}
+				]
+			}
+		})
+
+		new Vue({
+			el: '#v-for-object',
+			data: {
+				object: {
+					title: 'How to do lists in Vue',
+					author: 'Roc Less',
+					publishedAt: '2020-04-15'
+				}
+			}
+		})
+
+		Vue.component('todo-item', {
+			template: '\
+    <li>\
+      {{ title }}\
+      <button v-on:click="$emit(\'remove\')">Remove</button>\
+    </li>\
+  ',
+			props: ['title']
+		})
+
+		new Vue({
+			el: '#todo-list-example',
+			data: {
+				newTodoText: '',
+				todos: [
+					{
+						id: 1,
+						title: 'Do the dishes',
+					},
+					{
+						id: 2,
+						title: 'Take out the trash',
+					},
+					{
+						id: 3,
+						title: 'Mow the lawn'
+					}
+				],
+				nextTodoId: 4
+			},
+			methods: {
+				addNewTodo: function () {
+					this.todos.push({
+						id: this.nextTodoId++,
+						title: this.newTodoText
+					})
+					this.newTodoText = ''
+				}
+			}
+		})
+	</script>
+</body>
+</html>

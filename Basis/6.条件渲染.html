@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>条件渲染</title>
+	<script src="../4小时快速入门vue/js/vue.js"></script>
+</head>
+<body>
+	<div id="app1">
+		<h1>v-if指令</h1>
+		<div v-if="awesome">Vue is awesome!</div>
+		<div v-else>Oh no 😢</div>
+
+		<h2>在 &lt;template&gt; 元素上使用 v-if 条件渲染分组</h2>
+		<template v-if="ok">
+			<h1>Title</h1>
+			<p>Paragraph 1</p>
+			<p>Paragraph 2</p>
+		</template>
+
+		<h2>v-else指令</h2>
+		<div v-if="Math.random() > 0.5">Now you see me</div>
+		<div v-else>Now you don't</div>
+
+		<h2>v-else-if指令</h2>
+		<div v-if="type === 'A'">A</div>
+		<div v-else-if="type === 'B'">B</div>
+		<div v-else-if="type === 'C'">C</div>
+		<div v-else>Not A/B/C</div>
+
+		<h2>用 key 管理可复用的元素</h2>
+		<template v-if="loginType === 'username'">
+			<label>Username</label>
+			<input placeholder="Enter your username" key="username-input">
+		</template>
+		<template v-else>
+			<label>Email</label>
+			<input placeholder="Enter your email address" key="email-input">
+		</template>
+		<button @click="strongLoginType">切换登陆方式</button>
+
+
+		<h1>v-show指令</h1>
+		<div v-show="ok">Hello！</div>
+
+	</div>
+
+
+	<script>
+		var app1 = new Vue({
+			el: '#app1',
+			data: {
+				awesome: true,
+				ok: true,
+				type: 'B',
+				loginType: 'username'
+			},
+			methods: {
+				strongLoginType: function () {
+					if (this.loginType === 'username') {
+						this.loginType = !this.loginType;
+					} else {
+						this.loginType = 'username'
+					}
+				}
+			}
+		});
+	</script>
+</body>
+</html>

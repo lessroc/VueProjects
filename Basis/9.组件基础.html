@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>组件基础</title>
+	<script src="../4小时快速入门vue/js/vue.js"></script>
+	<style>
+		h1, div {
+			margin: 10px auto;
+			text-align: center;
+		}
+
+		h1 {
+			background-color: #aaaaaa;
+		}
+
+		div {
+			width: 70%;
+			background-color: #cccccc;
+		}
+	</style>
+</head>
+<body>
+	<!-- 基本示例 & 组件的复用 -->
+	<div id="components-demo">
+		<h1>基本示例 & 组件的复用</h1>
+		<button-counter></button-counter>
+		<button-counter></button-counter>
+		<button-counter></button-counter>
+	</div>
+
+	<!-- 通过 Prop 向子组件传递数据 -->
+	<div id="blog-post">
+		<h1>通过 Prop 向子组件传递数据</h1>
+		<blog-post title="我与Vue的旅程"></blog-post>
+		<blog-post title="用Vue博客"></blog-post>
+		<blog-post title="为什么Vue如此有趣"></blog-post>
+	</div>
+	<div id="blog-post-demo">
+		<blog-post
+				v-for="post in posts"
+				v-bind:key="post.id"
+				v-bind:title="post.title"
+		></blog-post>
+	</div>
+
+	<!-- 单个根元素 -->
+	<div id="blog-posts-root-element">
+		<h1>单个根元素</h1>
+		<blog-post
+				v-for="post in posts"
+				v-bind:key="post.id"
+				v-bind:post="post"
+		></blog-post>
+	</div>
+
+	<!-- 监听子组件事件 -->
+	<div id="blog-posts-events-demo">
+		<h1>监听子组件事件</h1>
+		<div :style="{ fontSize: postFontSize + 'em' }">
+			<blog-post
+					v-for="post in posts"
+					v-bind:key="post.id"
+					v-bind:post="post"
+					v-on:enlarge-text="postFontSize += 0.1"
+					v-on:reduce-text="postFontSize -= $event"
+			></blog-post>
+		</div>
+	</div>
+	<div id="custom-input">
+		<!--<custom-input
+				v-bind:value="searchText"
+				v-on:input="searchText = $event"
+		></custom-input>-->
+		<custom-input v-model="searchText"></custom-input>
+	</div>
+
+	<!-- 通过插槽分发内容 -->
+	<div id="alert-box">
+		<h1>通过插槽分发内容</h1>
+		<alert-box>坏事发生了.</alert-box>
+	</div>
+
+	<script>
+		// 基本示例 & 组件的复用
+		// 定义一个名为 button-counter 的新组件
+		Vue.component('button-counter', {
+			data: function () {     // data 必须是一个函数
+				return {
+					count: 0
+				}
+			},
+			template: '<button v-on:click="count++">You clicked me {{ count }} times.</button>'
+		})
+		new Vue({el: '#components-demo'})
+
+		// 通过 Prop 向子组件传递数据
+		Vue.component('blog-post', {
+			props: ['title'],
+			template: '<h3>{{ title }}</h3>'
+		})
+		new Vue({el: '#blog-post'})
+		new Vue({el: '#blog-post'})
+		new Vue({el: '#blog-post'})
+		new Vue({
+			el: '#blog-post-demo',
+			data: {
+				posts: [
+					{id: 1, title: 'My journey with Vue'},
+					{id: 2, title: 'Blogging with Vue'},
+					{id: 3, title: 'Why Vue is so fun'}
+				]
+			}
+		})
+
+		// 单个根元素
+		Vue.component('blog-post', {
+			props: ['post'],
+			template: `
+				<div class="blog-post">
+					<h3>{{ post.title }}</h3>
+					<div v-html="post.content"></div>
+				</div>`
+		})
+		new Vue({
+			el: '#blog-posts-root-element',
+			data: {
+				posts: [
+					{id: 1, title: 'My journey with Vue', content: '生命不息，折腾不止'},
+					{id: 2, title: 'Blogging with Vue', content: '生命不息，折腾不止'},
+					{id: 3, title: 'Why Vue is so fun', content: '生命不息，折腾不止'}
+				]
+			}
+		})
+
+		// 监听子组件事件
+		Vue.component('blog-post', {
+			props: ['post'],
+			template: `
+				<div class="blog-post">
+					<h3>{{ post.title }}</h3>
+					<button v-on:click="$emit('enlarge-text')">放大文字</button>
+					<button v-on:click="$emit('reduce-text', 0.1)">缩小文字</button>
+					<div v-html="post.content"></div>
+				</div>`
+		})
+		new Vue({
+			el: '#blog-posts-events-demo',
+			data: {
+				posts: [
+					{id: 1, title: 'My journey with Vue'},
+					{id: 2, title: 'Blogging with Vue'},
+					{id: 3, title: 'Why Vue is so fun'}
+				],
+				postFontSize: 1
+			}
+		})
+		Vue.component('custom-input', {
+			props: ['value'],
+			searchText: 'fsjf',
+			template: `
+				<input
+						v-bind:value="value"
+						v-on:input="$emit('input', $event.target.value)"
+				>`
+		})
+
+		// 通过插槽分发内容
+		Vue.component('alert-box', {
+			template: `
+                <div class="demo-alert-box">
+                    <strong>Error!</strong>
+                    <slot></slot>
+                </div>`
+		})
+		new Vue({el: 'alert-box'})
+
+	</script>
+</body>
+</html>

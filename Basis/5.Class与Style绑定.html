@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Class 与 Style 绑定</title>
+	<script src="../4小时快速入门vue/js/vue.js"></script>
+</head>
+<body>
+	<h1>Class 与 Style 绑定</h1>
+
+	<h2>绑定 HTML Class</h2>
+	<div id="app1">
+		<h3>对象语法：</h3>
+		<div class="static" v-bind:class="{ active: isActive, 'text-danger' : hasError }">内联写法</div>
+		<div v-bind:class="classObject">对象写法</div>
+		<div v-bind:class="classObject1">计算属性</div>
+	</div>
+
+	<div id="app2">
+		<h3>数组语法：</h3>
+		<div v-bind:class="[activeClass, errorClass]">内联数组写法</div>
+		<div v-bind:class="[isActive ? activeClass : '', errorClass]">内联三元表达式写法</div>
+		<div v-bind:class="[{ active: isActive }, errorClass]">数组对象写法</div>
+	</div>
+
+	<div id="app3">
+		<h3>用在组件上：<a href="https://cn.vuejs.org/v2/guide/components.html">组件基础</a></h3>
+		<my-component class="baz boo"></my-component>
+		<my-component v-bind:class="{ active: isActive }"></my-component>
+	</div>
+
+
+	<h2>绑定内联样式</h2>
+	<div id="app4">
+		<h3>对象语法：</h3>
+		<div v-bind:style="{ color: activeColor, fontSize: fontSize + 'px' }">v-bind:style="{ color: activeColor,
+		                                                                      fontSize: fontSize + 'px' }"
+		</div>
+		<div v-bind:style="styleObject">v-bind:style="styleObject"</div>
+	</div>
+
+	<div id="app5">
+		<h3>数组语法：</h3>
+		<div v-bind:style="[baseStyles, overridingStyles]">v-bind:style="[baseStyles, overridingStyles]"</div>
+	</div>
+
+	<div id="app6">
+		<h3>多重值：</h3>
+		<div :style="{ display: ['-webkit-box', '-ms-flexbox', 'flex'] }">多重值实例</div>
+	</div>
+	<script>
+		/* 绑定HTML Class */
+		// 对象语法实例
+		var app1 = new Vue({
+			el: '#app',
+			data: {
+				isActive: true,
+				hasError: false,
+				classObject: {
+					active: true,
+					'text-danger': false
+				},
+				error: null
+			},
+			computed: {
+				classObject1: function () {
+					return {
+						active: this.isActive && !this.error,
+						'text-danger': this.error && this.error.type === 'fatal'
+					}
+				}
+			}
+		});
+
+		// 数组语法实例
+		var app2 = new Vue({
+			el: '#app2',
+			data: {
+				isActive: true,
+				activeClass: 'active',
+				errorClass: 'text-danger'
+			},
+		});
+
+		// 绑定用在组件上
+		var app3 = new Vue({
+			el: '#app3',
+			data: {
+				isActive: true
+			},
+		});
+		// 绑定语法
+		Vue.component('my-component', {
+			template: '<p class="foo bar">Hi</p>'
+		});
+		// 创建绑定
+		new Vue({el: '#app3'});
+
+
+		/* 绑定内联样式 */
+		// 对象语法实例
+		var app4 = new Vue({
+			el: '#app4',
+			data: {
+				activeColor: 'red',
+				fontSize: 30,
+				// 把样式写到对象里 -- 这样写法更好
+				styleObject: {
+					color: 'blue',
+					fontSize: '13px'
+				}
+			},
+		});
+
+		// 数组语法实例
+		var app5 = new Vue({
+			el: '#app5',
+			data: {
+				baseStyles: {
+					color: '#666',
+					backgroundColor: '#ccc'
+				},
+				overridingStyles: {
+					color: 'red',
+					backgroundColor: '#ffa'
+				}
+			},
+		});
+
+		// 多重值实例
+		var app6 = new Vue({
+			el: '#app6',
+			data: { }
+		})
+	</script>
+</body>
+</html>

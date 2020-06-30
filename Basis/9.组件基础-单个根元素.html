@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>组件基础-单个根元素</title>
+	<script src="../4小时快速入门vue/js/vue.js"></script>
+	<style>
+		h1, div {
+			width: 70%;
+			margin: 5px auto;
+			text-align: center;
+		}
+
+		h1 {
+			background-color: #aaaaaa;
+		}
+
+		div {
+			width: 70%;
+			background-color: #cccccc;
+		}
+	</style>
+</head>
+<body>
+	<!-- 单个根元素 -->
+	<h1>单个根元素</h1>
+	<div id="blog-posts-root-element">
+		<blog-post
+				v-for="post in posts"
+				v-bind:key="post.id"
+				v-bind:post="post"
+		></blog-post>
+	</div>
+
+
+	<script>
+		// 单个根元素
+		Vue.component('blog-post', {
+			props: ['post'],
+			template: `
+				<div class="blog-post">
+					<h3>{{ post.title }}</h3>
+					<div v-html="post.content"></div>
+				</div>
+			`
+		})
+		new Vue({
+			el: '#blog-posts-root-element',
+			data: {
+				posts: [
+					{id: 1, title: 'My journey with Vue'},
+					{id: 2, title: 'Blogging with Vue'},
+					{id: 3, title: 'Why Vue is so fun'}
+				],
+			}
+		})
+
+
+	</script>
+</body>
+</html>

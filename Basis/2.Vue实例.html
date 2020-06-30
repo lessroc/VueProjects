@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Vue实例</title>
+	<script src="../4小时快速入门vue/js/vue.js" type="text/javascript" charset="utf-8"></script>
+</head>
+<body>
+<div id="app">
+	<p>{{ foo }}</p>
+	<!-- 这里的 `foo` 不会更新！ -->
+	<button v-on:click="foo = 'baz'">Change it</button>
+</div>
+<div id="app1">
+	{{ a }}
+</div>
+</body>
+<script>
+    var obj = {
+        foo: 'bar'
+    };
+
+    Object.freeze(obj);
+
+    new Vue({
+        el: '#app',
+        data: obj
+    });
+
+    var data = { a : 1};
+    var vm = new Vue({
+		el	: '#app1',
+		data: data
+	});
+
+    vm.$watch('a', function(newVal, oldVal){
+        console.log(newVal, oldVal);
+	});
+
+	vm.$data.a = 'Text...'
+</script>
+</html>
