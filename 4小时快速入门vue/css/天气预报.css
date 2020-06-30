@@ -1,0 +1,126 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: #eee;
+    font-family: "微软雅黑", serif;
+}
+
+.wrap {
+    width: 1000px;
+    margin: 100px auto;
+}
+
+.search_form .title {
+    text-align: center;
+    margin: 30px 0;
+    font-family: "Microsoft YaHei UI Light", serif;
+    letter-spacing: 1rem;
+}
+
+/* 文字渐变光波流动动画 - 开始 */
+@media all and (-webkit-min-device-pixel-ratio:0) and (min-resolution:.001dpcm) {
+    .masked {
+        background-image: -webkit-linear-gradient(left, #3f4452, #0088ff 25%, #3f4452 50%, #0088ff 75%, #3f4452);
+        -webkit-text-fill-color: transparent;
+        -webkit-background-clip: text;
+        -webkit-background-size: 200% 100%;
+        -webkit-animation: masked-animation 4s infinite linear
+    }
+}
+
+@-webkit-keyframes masked-animation {
+    0% {
+        background-position: 0 0
+    }
+
+    100% {
+        background-position: -100% 0
+    }
+}
+/* 文字渐变光波流动动画 - 结束 */
+
+.search_form {
+    width: 504px;
+    margin: 0 auto;
+}
+
+input, button {
+    outline: none;
+    background: none;
+    border: none;
+    font-family: 'Microsoft YaHei', 'Heiti SC', tahoma, arial, 'Hiragino Sans GB', \\5B8B\4F53, sans-serif;
+}
+
+.form_group {
+    /*padding: 0 15px;*/
+    width: 500px;
+    height: 35px;
+    margin: 0 auto;
+    background: #eee;
+    border: 2px solid #0088ff;
+    border-radius: 5px;
+}
+
+.form_group .input_text {
+    width: 80%;
+    height: 100%;
+    color: #333;
+    font-size: 1rem;
+    margin: 0 0 0 12px;
+    float: left;
+}
+
+.form_group .input_sub {
+    width: 17.5%;
+    height: 100%;
+    float: right;
+    color: #fff;
+    font-size: 1rem;
+    cursor: pointer;
+    background-color: #0088ff;
+    transition: all .2s ease;
+}
+
+.form_group .input_sub:hover {
+    background-color: #0088dd;
+}
+
+.hotkey a {
+    display: inline-block;
+    color: #666;
+    text-decoration: none;
+    margin: 15px 0 50px;
+    padding-left: 12px;
+    font-size: 1rem;
+}
+
+.weather_list {
+    list-style: none;
+}
+
+.weather_list li {
+    float: left;
+    width: 20%;
+    text-align: center;
+}
+
+.info_type {
+    font-size: 20px;
+}
+
+.info_type,
+.info_temp {
+    color: navy;
+    height: 2.5rem;
+}
+
+.info_data {
+    color: #666;
+}
+
+.clear_float {
+    clear: both;
+}

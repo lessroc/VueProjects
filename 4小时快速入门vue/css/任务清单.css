@@ -1,0 +1,189 @@
+* {
+	margin: 0;
+	padding: 0;
+	font-size: 16px;
+	font-family: "Microsoft YaHei UI Light", serif;
+}
+
+body {
+	background: #eee;
+}
+
+[v-cloak] {
+	display: none;
+}
+
+#app {
+	width: 500px;
+	margin: 0 auto 100px;
+}
+
+.header h1 {
+	color: #666;
+	text-align: center;
+	font-weight: 100;
+	margin: 30px 0;
+	font-size: 40px;
+	font-family: "Microsoft YaHei UI Light", serif;
+}
+
+input, button {
+	outline: none;
+	background: none;
+	border: none;
+}
+
+.btn {
+	display: none;
+}
+
+.btn-active {
+	position: absolute;
+	top: 9px;
+	right: 15px;
+}
+
+.input .btn-active {
+	opacity: 0;
+	cursor: pointer;
+	transition: all .3s ease;
+}
+
+input:focus + .btn-active {
+	cursor: pointer;
+	opacity: .7;
+}
+
+.input button:hover {
+	opacity: 1;
+}
+
+.input {
+	position: relative;
+	width: 498px;
+	height: 40px;
+	line-height: 40px;
+	background: #fff;
+	border: 1px solid #ccc;
+	box-shadow: inset 0 0 1em rgba(0, 0, 0, 0.1);
+}
+
+.todo-list {
+	list-style: none;
+}
+
+.header footer {
+	width: 468px;
+}
+
+.header input {
+	width: 432px;
+}
+
+.todo {
+	min-height: 40px;
+	line-height: 40px;
+	background: #fff;
+	border: 1px solid #ccc;
+}
+
+.footer {
+	min-height: 30px;
+	line-height: 30px;
+	background: #fff;
+	border: 1px solid #ccc;
+}
+
+.view .index {
+	display: inline-block;
+	width: 30px;
+	position: absolute;
+}
+
+.view label {
+	display: inline-block;
+	width: 420px;
+	line-height: 25px;
+	margin-top: 6px;
+	margin-left: 20px;
+}
+
+.view button {
+	opacity: 0;
+	height: 40px;
+	line-height: 40px;
+	cursor: pointer;
+	float: right;
+	transition: all .3s ease;
+}
+
+.footer {
+	font-size: 14px;
+	height: 30px;
+	line-height: 30px;
+	overflow: hidden;
+}
+
+.footer button {
+	position: absolute;
+	right: 15px;
+	height: 30px;
+	line-height: 30px;
+	margin-right: -15px;
+	padding: 0 10px;
+	cursor: pointer;
+	opacity: .7;
+	transition: all .3s ease;
+	z-index: 1;
+}
+
+.footer button:hover {
+	opacity: 1;
+}
+
+.footer button::after {
+	content: '';
+	position: absolute;
+	width: 52px;
+	height: 30px;
+	margin-left: 10px;
+	background: #ccc;
+	border-radius: 0;
+	transition: all .3s ease;
+	z-index: -1;
+}
+
+.footer button:hover::after {
+	margin-left: -42px;
+	background: #ccc;
+	border-radius: 10px 0 0 10px;
+}
+
+.view, input, footer {
+	position: relative;
+	padding: 0 15px;
+}
+
+.todo:hover button {
+	opacity: .7;
+}
+
+.todo button:hover {
+	opacity: 1;
+}
+
+.cascade {
+	width: 98%;
+	height: 3px;
+	margin: 0 auto;
+	background: #fff;
+	border: 1px solid #ccc;
+}
+
+.cascade2 {
+	width: 96%;
+}
+
+.todo, .footer, .cascade {
+	border-top: none;
+}
