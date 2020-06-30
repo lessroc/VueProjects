@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>data数据对象</title>
+	<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+</head>
+<body>
+<div id="app">
+	{{ message }}
+	<h1>{{ school.name }} {{ school.qq }}</h1>
+	<ul>
+		<li>{{ campus[0] }}</li>
+		<li>{{ campus[1] }}</li>
+		<li>{{ campus[2] }}</li>
+		<li>{{ campus[3] }}</li>
+	</ul>
+</div>
+<script>
+	var app = new Vue({
+		el: '#app',
+		data: {
+			message: '你好，RocPeak',
+			school: {
+				name: 'RocPeak',
+				qq: '794428461'
+			},
+			campus: ['北京军区', '南京军区', '广州军区', '兰州军区']
+		}
+	})
+</script>
+</body>
+</html>
