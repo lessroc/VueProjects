@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>列表渲染</title>
+</head>
+<body>
+<!--
+1. 列表显示
+  数组: v-for / index
+  对象: v-for / key
+2. 列表的更新显示
+  删除item
+  替换item
+-->
+<div id="app">
+	<h1>v-for 遍历数组</h1>
+	<ul>
+		<li v-for="(person, index) in persons" :key="index">
+			{{ index }} - {{ person.name }} - {{ person.age }}
+			<button @click="deletePerson(index)">删除</button>
+			<button @click="updateInfo(index, {name: 'Dog', age: 3})">更新</button>
+		</li>
+	</ul>
+	<button @click="addPerson({name: 'Cat', age: 4})">添加</button>
+
+	<h1>v-for 遍历对象</h1>
+	<ul>
+		<li v-for="(value, key) in persons[1]" :key="key">
+			{{ key }} - {{ value }}
+		</li>
+	</ul>
+</div>
+<script src="../vue.js"></script>
+<script>
+	var app = new Vue({
+		el: '#app',
+		data: {
+			persons: [
+				{name: 'Tom.', age: 16},
+				{name: 'Bob.', age: 17},
+				{name: 'Jack', age: 18},
+				{name: 'Mary', age: 19}
+			],
+		},
+		methods: {
+			deletePerson(index) {
+				this.persons.splice(index, 1)   // 调用了不是原生数组的splice(), 而是一个变异(重写)方法
+			},
+			updateInfo(index, newPerson) {
+				console.log('updateInfo', index, newPerson)
+				// 并没有改变 persons 本身，数组内部发生了变化，但没有调用变异方法，vue不会更新界面
+				// this.persons[index] = newPerson
+				// this.persons = []
+				this.persons.splice(index, 1, newPerson)
+			},
+			addPerson(newPerson) {
+				this.persons.push(newPerson)
+			}
+		}
+	})
+</script>
+</body>
+</html>
