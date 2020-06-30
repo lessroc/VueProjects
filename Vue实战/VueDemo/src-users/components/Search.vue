@@ -1,0 +1,35 @@
+<template>
+	<section class="jumbotron">
+		<h3 class="jumbotron-heading">Search Github Users</h3>
+		<div>
+			<input type="text" placeholder="请输入搜索名称" v-model="searchName"/>
+			<button @click="search">Search</button>
+		</div>
+	</section>
+</template>
+
+<script>
+	import PubSub from 'pubsub-js'
+
+	export default {
+		data () {
+			return {
+				searchName: '',
+			}
+		},
+
+		methods: {
+			search () {
+				const searchName = this.searchName.trim()
+				if (searchName) {
+					// 发布搜索的消息
+					PubSub.publish('search', searchName)
+				}
+			}
+		}
+	}
+</script>
+
+<style>
+
+</style>
