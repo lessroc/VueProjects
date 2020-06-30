@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>模板解析_一般指令</title>
+	<style>
+		.ColorRed {
+			color: red;
+		}
+
+		.fontSize {
+			font-size: 30px;
+		}
+	</style>
+</head>
+<body>
+<div id="test">
+	<p v-text="msg"></p>
+	<p v-html="msg"></p>
+	<p class="fontSize" v-class="myClass">Font: red</p>
+</div>
+
+<script type="text/javascript" src="js/mvvm/compile.js"></script>
+<script type="text/javascript" src="js/mvvm/mvvm.js"></script>
+<script type="text/javascript" src="js/mvvm/observer.js"></script>
+<script type="text/javascript" src="js/mvvm/watcher.js"></script>
+<script type="text/javascript">
+	new MVVM({
+		el: '#test',
+		data: {
+			msg: '<a href="https://www.baidu.com">百度一下</a>',
+			myClass: 'ColorRed'
+		},
+		methods: {
+			test() {
+				alert(this.msg)
+			}
+		}
+	})
+</script>
+</body>
+</html>
