@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>v-if</title>
+	<script src="js/vue.js" type="text/javascript" charset="UTF-8"></script>
+</head>
+<body>
+<div id="app">
+	<span v-if="isShow">我爱编程</span>          <!-- 操作doc树 -->
+	<span v-show="isShow">编程使我快乐</span>     <!-- 操作元素 -->
+	<input type="button" value="切换显示状态" @click="toggleIsShow" />
+	<h2 v-if="temperature>=36">天呐! 热晕了</h2>
+</div>
+<script>
+	var app = new Vue({
+		el: '#app',
+		data: {
+			isShow: false,
+			temperature: 38
+		},
+		methods: {
+			toggleIsShow: function () {
+				this.isShow = !this.isShow;
+			}
+		}
+	})
+</script>
+</body>
+</html>

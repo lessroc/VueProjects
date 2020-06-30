@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>v-on指令补充</title>
+	<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>
+<div id="app">
+	<input type="text" placeholder="点我前请先打开控制台" v-model="userEnter" @keyup.enter="sayHi"> <!-- 输入框获得焦点后按enter键触发函数 -->
+	<input type="button" value="点我试试咯" @click="doIt('do demo', 'do test')"> <!-- 带参函数 -->
+</div>
+<script>
+	var app = new Vue({
+		el: '#app',
+		data: {
+			userEnter: ''
+		},
+		methods: {
+			doIt: function (p1, p2) {
+				console.log("do it"); // => do it
+				console.log(p1); // => do demo
+				console.log(p2); // => do test
+			},
+			sayHi: function () {
+				alert("You: " + this.userEnter + "\nMe:  今天天气不错哟");
+			}
+		}
+	})
+</script>
+</body>
+
+</html>

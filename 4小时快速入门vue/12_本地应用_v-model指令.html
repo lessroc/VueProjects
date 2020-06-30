@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>v-model</title>
+	<script src="js/vue.js"></script>
+</head>
+<body>
+<div id="app">
+	<input type="text" v-model="message" placeholder="单行文本框" @keyup.enter="getMsg">  <!-- 双向绑定 -->
+	<input type="button" value="修改v-model绑定参数" @click="setMsg">
+	<h2 v-pre>{{ message }}</h2>
+	<textarea v-model="message" placeholder="多行文本框"></textarea> <!-- 多行文本框 -->
+</div>
+<script>
+	var app = new Vue({
+		el: '#app',
+		data: {
+			message: ''
+		},
+		methods: {
+			getMsg: function () {
+				alert(this.message);
+			},
+			setMsg: function () {
+				this.message = '我爱编程，编程使我快乐！';
+			}
+		}
+	})
+</script>
+</body>
+</html>

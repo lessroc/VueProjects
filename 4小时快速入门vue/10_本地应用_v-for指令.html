@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>v-for</title>
+	<script src="js/vue.js"></script>
+</head>
+<body>
+<div id="app">
+	<input type="button" value="添加数据" @click="add">
+	<input type="button" value="移除数据" @click="remove">
+	<ul>
+		<li v-for="(item, index) in arr">{{ index + 1 }} 中国人民解放军 {{ item }} 军区</li>
+	</ul>
+	<div v-for="item in vegetables" v-bind:title="item.name">{{ item.name }}</div>
+</div>
+<script>
+	var app = new Vue({
+		el: '#app',
+		data: {
+			arr: ['北京', '上海', '广州', '香港'],
+			vegetables: [
+				{name: '西兰花炒蛋'},
+				{name: '蛋炒西兰花'}
+			]
+		},
+		methods: {
+			add: function () {
+				this.vegetables.push({name: '西红柿炒蛋'}); // 将'西红柿炒蛋'添加到数组的末尾
+			},
+			remove: function () {
+				this.vegetables.shift(); // 从数组中删除第一个元素
+			}
+		}
+	})
+</script>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>v-html指令</title>
+	<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+</head>
+<body>
+<div id="app">
+	<h1 v-text="content"></h1>  <!-- <a href="https://www.baidu.com">百度一下</a> -->
+	<h1 v-html="content"></h1>	<!-- 百度一下 -->
+</div>
+<script>
+	var app = new Vue({
+		el: '#app',
+		data: {
+			// content: 'data数据对象',
+			content: '<a href="https://www.baidu.com">百度一下</a>'
+		}
+	})
+</script>
+</body>
+</html>

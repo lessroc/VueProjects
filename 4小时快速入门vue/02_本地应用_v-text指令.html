@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>data数据对象</title>
+	<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+</head>
+<body>
+<div id="app">
+	<h1 v-text="message">广州</h1>       <!-- 南部战区 -->
+	<h1 v-text="message + '!'">广州</h1> <!-- 南部战区! -->
+	<h1 v-text="info + '!'">广州</h1>    <!-- 研究中心! -->
+	<h1>{{ message + '!'}}广州</h1>      <!-- 南部战区!广州 -->
+</div>
+<script>
+	var app = new Vue({
+		el: '#app',
+		data: {
+			message: '南部战区',
+			info: '研究中心'
+		}
+	})
+</script>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>v-on指令</title>
+	<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>
+<div id="app">
+	<input type="button" value="v-on指令" v-on:click="learnIt">
+	<input type="button" value="v-on简写" @click="learnIt">
+	<input type="button" value="双击事件" @dblclick="learnIt">
+	<input type="button" value="changeFood" @click="changeFood">
+	<h2>{{ food }}</h2>
+</div>
+<script>
+	var app = new Vue({
+		el: '#app',
+		data: {
+			food: '蛋炒饭'
+		},
+		methods: {
+			learnIt: function () {
+				alert("学It");
+			},
+			changeFood: function () {
+				// console.log(this.food);
+				this.food += "蛋炒面! "
+			}
+		}
+	})
+</script>
+</body>
+
+</html>

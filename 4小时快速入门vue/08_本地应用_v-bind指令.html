@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>v-bind</title>
+	<script src="js/vue.js" type="text/javascript"></script>
+	<style>
+		.active {
+			border: 1px solid red;
+		}
+	</style>
+</head>
+<body>
+<div id="app">
+	<img v-bind:src="imgSrc" alt="">
+	<img :src="imgSrc" alt="" :title="imgTitle + '!'" :class="isActive ? 'active' : ''" @click="toggleActive"> <!-- 典型的三元表达式 -->
+	<img :src="imgSrc" alt="" :title="imgTitle + '!'" :class="{active:isActive}" @click="toggleActive"> <!-- isActive 为真则显示样式: active -->
+</div>
+<script>
+	var app = new Vue({
+		el: '#app',
+		data: {
+			imgSrc: './images/cover.png',
+			imgTitle: 'SwitchFoot',
+			isActive: false
+		},
+		methods: {
+			toggleActive: function () {
+				this.isActive = !this.isActive;
+			}
+		}
+	})
+</script>
+</body>
+</html>
