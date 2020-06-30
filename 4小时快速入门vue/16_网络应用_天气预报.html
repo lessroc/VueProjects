@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>天气预报</title>
+	<link rel="stylesheet" href="css/天气预报.css">
+	<!-- 官网提供的 axios 在线地址 -->
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<body>
+<div id="app" class="wrap">
+	<div class="search_form">
+		<h1 class="masked title">天气预报</h1>
+		<div class="form_group">
+			<input type="text" class="masked input_text" v-model="city" @keyup.enter="searchWeather" placeholder="请输入查询地" />
+			<button class="input_sub" @click="searchWeather">查 询</button>
+		</div>
+		<div class="masked hotkey">
+			<a href="javascript:(0);" @click="changeCity('北京')">北京</a>
+			<a href="javascript:(0);" @click="changeCity('上海')">上海</a>
+			<a href="javascript:(0);" @click="changeCity('广州')">广州</a>
+			<a href="javascript:(0);" @click="changeCity('深圳')">深圳</a>
+		</div>
+	</div>
+	<ul class="masked weather_list">
+		<li v-for="item in weatherList">
+			<div class="info_type"><strong class="iconfont">{{ item.type }}</strong></div>
+			<div class="info_temp"><strong>{{ item.low }}</strong> ~ <b>{{ item.high }}</b></div>
+			<div class="info_data"><span>{{ item.date }}</span></div>
+		</li>
+		<div class="clear_float"></div>
+	</ul>
+</div>
+
+<script src="js/vue.js"></script>
+<script src="js/天气预报.js"></script>
+</body>
+</html>
