@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+	<link rel="stylesheet" href="./css/bootstrap.css">
+	<title>计数器</title>
+	<style>
+		.align-items-center {
+			height: 200px;
+		}
+		.btn-secondary:focus {
+			box-shadow: none;
+		}
+	</style>
+</head>
+
+<body>
+<div id="app">
+	<div class="container">
+		<div class="row justify-content-md-center align-items-center">
+			<div class="col-md-4 btn-group">
+				<button class="btn btn-secondary btn-lg " @click="sub">-</button>
+				<button class="btn btn-light btn-lg" disabled>{{ number }}</button>
+				<button class="btn btn-secondary btn-lg" @click="add">+</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script>
+	var app = new Vue({
+		el: '#app',
+		data: {
+			number: 0
+		},
+		methods: {
+			add: function () {
+				console.log('add');
+				if (this.number < 10) {
+					this.number++;
+				} else {
+					alert('值上限：10');
+				}
+			},
+			sub: function () {
+				console.log('sub');
+				if (this.number > 0) {
+					this.number--;
+				} else {
+					alert('值下限：0');
+				}
+			}
+		}
+	})
+</script>
+</body>
+
+</html>

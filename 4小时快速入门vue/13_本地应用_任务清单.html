@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>任务清单</title>
+	<script src="js/vue.js"></script>
+	<link rel="stylesheet" href="css/任务清单.css">
+</head>
+<!-- 任务清单功能：1.新增    2.删除    3.统计    4.清空    5.隐藏
+		 该demo使用到了：v-model、@keyup、@click、:class、v-for、v-if、v-show、v-cloak 等指令
+		 v-model ：使用 v-model 数据双向绑定，实现了输入框与数组间的通信
+		 @keyup  ：实现了键盘 enter 键调用 add 函数添加数据
+		 @click  ：实现了鼠标 click 按钮调用 add 函数添加数据 与 清空任务列表
+		 :class  ：监测输入框状态，使用三元表达式智能地切换样式
+		 v-for   ：遍历数组元素
+		 v-if    ：任务列表为空时抹去该元素
+		 v-show  ：任务列表为空时使用 display 属性隐藏该元素
+		 v-cloak ：防止未编译的双大括号闪现
+-->
+<body>
+<!-- 主体区域 -->
+<section id="app" v-cloak>
+	<!-- 输入框 -->
+	<header class="header">
+		<h1>任务清单</h1>
+		<div class="input">
+			<input v-model="inputValue" @keyup.enter="add" autofocus="autofocus" autocomplete="off" placeholder="请输入任务" />
+			<button :class="inputValue === '' ? 'btn' : 'btn-active'" @click="add">➕</button>
+		</div>
+	</header>
+	<!-- 列表区域 -->
+	<section>
+		<ul class="todo-list">
+			<li class="todo" v-for="(item, index) in list">
+				<div class="view">
+					<span class="index">{{ index+1 }}.</span>
+					<label>{{ item }}</label>
+					<button @click="remove(index)">❌</button>
+				</div>
+			</li>
+		</ul>
+	</section>
+	<!-- 统计和清空 -->
+	<footer class="footer">
+		<span v-if="list.length !== 0">总共有 <strong>{{ list.length }}</strong> 个任务</span>
+		<button v-show="list.length !== 0" @click="clear">清空</button>
+	</footer>
+	<div class="cascade"></div>
+	<div class="cascade cascade2"></div>
+</section>
+
+<script>
+	new Vue({
+		el: '#app',
+		data: {
+			list: ['编写代码', '调试代码', '合并代码', '测试代码'],
+			inputValue: '我爱编程，编程使我快乐',
+		},
+		methods: {
+			add: function () {
+				if (this.inputValue === '') {
+					alert("任务名称不能为空！");
+				} else {
+					this.list.push(this.inputValue); // 添加任务到数组中
+					this.inputValue = '' // 清空输入框内容
+				}
+			},
+			remove: function (index) {
+				console.log("删除");
+				console.log(index); // 控制台输出被删除的下标
+				this.list.splice(index, 1) // 找到对应的下标并且干掉它
+			},
+			clear: function () {
+				this.list = []; // 清空，重新赋值为空数组
+			}
+		}
+	})
+</script>
+</body>
+
+</html>
