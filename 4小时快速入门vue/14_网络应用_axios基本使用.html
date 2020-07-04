@@ -37,7 +37,7 @@
 	 */
 	document.querySelector(".post").onclick = function () {
 		// axios.post("https://autumnfish.cn/api/user/reg123", {username: "less"}) // 错误地址
-		axios.post("https://autumnfish.cn/api/user/reg",{username:"less"})   // 正确地址
+		axios.post("https://autumnfish.cn/api/user/reg",{username:"less"}) // 正确地址
 				.then(function (response) {
 					console.log(response);
 				}, function (err) {
